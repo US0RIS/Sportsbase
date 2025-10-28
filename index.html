@@ -1,1 +1,126 @@
-code lol
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sportsbase Live Score Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <h1>Sportsbase</h1>
+        <p class="tagline">Follow the teams you love with live ESPN scoreboards.</p>
+        <button id="edit-preferences" class="ghost-button" type="button">
+          Update preferences
+        </button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="setup-view" class="panel">
+        <h2>Choose your sports and teams</h2>
+        <p>
+          Start by selecting between one and five sports, then pick up to five teams per sport.
+          We pull every score directly from ESPN so you always see live numbers and final results.
+        </p>
+        <div id="setup-feedback" class="feedback" role="alert" aria-live="polite"></div>
+
+        <section id="sports-step" class="setup-step">
+          <header class="step-header">
+            <span class="step-index">Step 1</span>
+            <h3>Select sports</h3>
+          </header>
+          <form id="sports-form">
+            <div id="sports-options" class="card-list"></div>
+            <div class="form-actions">
+              <button type="submit" class="primary-button">Next: choose teams</button>
+            </div>
+          </form>
+        </section>
+
+        <section id="teams-step" class="setup-step hidden">
+          <header class="step-header">
+            <span class="step-index">Step 2</span>
+            <h3>Select teams</h3>
+          </header>
+          <form id="teams-form">
+            <div id="teams-selections" class="teams-grid"></div>
+            <div class="form-actions">
+              <button type="submit" class="primary-button">Start tracking</button>
+              <button type="button" id="back-to-sports" class="ghost-button">Back</button>
+            </div>
+          </form>
+        </section>
+      </section>
+
+      <section id="dashboard-view" class="panel hidden" aria-live="polite">
+        <header class="dashboard-header">
+          <div>
+            <h2>Your live scoreboards</h2>
+            <p class="muted">
+              We refresh in real time using ESPN scoreboards. You can also refresh manually if you
+              like.
+            </p>
+          </div>
+          <div class="dashboard-actions">
+            <button id="refresh-dashboard" class="primary-button" type="button">Refresh now</button>
+            <span class="last-updated" id="last-updated" aria-live="polite"></span>
+          </div>
+        </header>
+        <div id="dashboard-feedback" class="feedback" role="alert" aria-live="polite"></div>
+        <div id="scoreboard" class="scoreboard"></div>
+      </section>
+    </main>
+
+    <template id="team-template">
+      <article class="team-card">
+        <header class="team-card-header">
+          <div class="team-identity">
+            <img class="team-logo" alt="" />
+            <div>
+              <h3 class="team-name"></h3>
+              <p class="team-subtitle muted"></p>
+            </div>
+          </div>
+        </header>
+        <div class="team-events"></div>
+      </article>
+    </template>
+
+    <template id="event-template">
+      <article class="event-card">
+        <header class="event-header">
+          <span class="event-state"></span>
+          <span class="event-time muted"></span>
+        </header>
+        <div class="score-row">
+          <span class="team-label"></span>
+          <span class="team-score"></span>
+        </div>
+        <div class="score-row opponent">
+          <span class="team-label"></span>
+          <span class="team-score"></span>
+        </div>
+        <div class="event-detail muted"></div>
+      </article>
+    </template>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          Scores, logos, and team data are sourced live from publicly available ESPN APIs. This
+          tracker refreshes automatically every minute.
+        </p>
+      </div>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
